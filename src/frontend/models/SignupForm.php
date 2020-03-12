@@ -13,6 +13,14 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $first_name;
+    public $last_name;
+    public $github_link;
+    public $linkedin_link;
+    public $resume_link;
+    public $portfolio_link;
+    public $phonenumber;
+    public $note;
 
 
     /**
@@ -25,6 +33,15 @@ class SignupForm extends Model
             ['username', 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
+
+            ['last_name', 'required'],
+            ['last_name', 'string', 'min' => 1, 'max' => 255],
+
+            ['last_name', 'required'],
+            ['last_name', 'string', 'min' => 1, 'max' => 255],
+
+            ['phonenumber', 'required'],
+            ['phonenumber', 'string', 'max' => 14],
 
             ['email', 'trim'],
             ['email', 'required'],
@@ -50,7 +67,15 @@ class SignupForm extends Model
         
         $user = new User();
         $user->username = $this->username;
+        $user->first_name = $this->first_name;
+        $user->last_name = $this->last_name;
+        $user->github_link = $this->github_link;
+        $user->linkedin_link = $this->linkedin_link;
+        $user->resume_link = $this->resume_link;
+        $user->portfolio_link = $this->portfolio_link;
+        $user->phonenumber = $this->phonenumber;
         $user->email = $this->email;
+        $user->note = $this->note;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();

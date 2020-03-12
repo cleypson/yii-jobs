@@ -19,15 +19,31 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+            <?= $form->field($model, 'first_name')->label('Primeiro Nome')  ?>
 
-                <?= $form->field($model, 'email') ?>
+            <?= $form->field($model, 'last_name')->label('Último Nome') ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+            <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-                <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-                </div>
+            <?= $form->field($model, 'email') ?>
+
+            <?= $form->field($model, 'password')->passwordInput() ?>
+
+            <?= $form->field($model, 'phonenumber')->label('Telefone de Contato') ?>
+
+            <?= $form->field($model, 'github_link')->label('Github (opcional)') ?>
+
+            <?= $form->field($model, 'resume_link')->label('Currículo (opcional)') ?>
+
+            <?= $form->field($model, 'linkedin_link')->label('Linkedin (opcional)') ?>
+
+            <?= $form->field($model, 'portfolio_link')->label('Portifólio (opcional)') ?>
+            
+            <?= $form->field($model, 'note')->textarea()->label('Observações (opcional)') ?>
+
+            <div class="form-group">
+                <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+            </div>
 
             <?php ActiveForm::end(); ?>
         </div>

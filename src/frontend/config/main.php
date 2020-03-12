@@ -40,8 +40,8 @@ return [
 
         'formatter' => [
             'dateFormat' => 'dd/MM/yyyy',
-            'decimalSeparator' => '.',
-            'thousandSeparator' => ',',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => '.',
             'currencyCode' => 'R$ ',
         ],
         'urlManager' => [

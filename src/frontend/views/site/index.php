@@ -2,7 +2,8 @@
 
 /* @var $this yii\web\View */
 
-use yii\widgets\LinkPager;
+use yii\bootstrap4\Html;
+use yii\bootstrap4\LinkPager;
 
 $this->title = 'Feba Jobs';
 ?>
@@ -11,19 +12,20 @@ $this->title = 'Feba Jobs';
         <div class="row">
             <?php foreach ($vacancies as $vacancy) : ?>
                 <tr>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><?= $vacancy->title ?></h3>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title"><?= $vacancy->title ?></h3>
                         </div>
-                        <div class="panel-body">
-                            <h4>Descrição:</h4>
-                            <p><?= $vacancy->description ?></p>
-                            <h4>Requisitos:</h4>
-                            <p><?= $vacancy->requeriments ?></p>
-                            <h4>Remuneração:</h4>
+                        <div class="card-body">
+                            <h3 class="card-title">Descrição:</h3>
+                            <p class="card-text"><?= $vacancy->description ?></p>
+                            <h3 class="card-title">Remuneração:</h3>
                             <p><?= Yii::$app->formatter->asCurrency($vacancy->salary_range);  ?></p>
                         </div>
-                        <div class="panel-footer"><button type="button" class="btn btn-default">Aplicar-se</div>
+                        <div class="card-footer">
+                            <?= Html::a('Aplicar-se', ['site/detail', 'id' => $vacancy->id], ['class' => 'btn btn-primary']) ?>
+                            <?= Html::a('Detalhar', ['site/detail', 'id' => $vacancy->id], ['class' => 'btn btn-danger float-right']) ?>
+                        </div>
                     </div>
                 </tr>
             <?php endforeach; ?>

@@ -5,8 +5,8 @@
 
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use yii\bootstrap4\Nav;
+use yii\bootstrap4\NavBar;
 use yii\bootstrap4\Breadcrumbs;
 use common\widgets\Alert;
 
@@ -33,6 +33,7 @@ AppAsset::register($this);
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-light bg-dark',
+            'style' => 'background-color: #e3f2fd;'
         ],
     ]);
     $menuItems = [

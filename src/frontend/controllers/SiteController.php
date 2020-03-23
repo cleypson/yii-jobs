@@ -1,20 +1,24 @@
 <?php
 namespace frontend\controllers;
 
+use Yii; 
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
-use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\Profile;
+use common\models\User;
 use common\models\Vacancy;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\ProfileForm;
+use frontend\models\VacancyForm;
 use yii\data\Pagination;
 
 /**
@@ -47,7 +51,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['get'],
                 ],
             ],
         ];
@@ -76,8 +80,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $query = Vacancy::find();
-
+        $query = Vacancy::find(['status' => 10]);
         $pagination = new Pagination([
             'defaultPageSize' => 5,
             'totalCount' => $query->count(),
@@ -91,6 +94,55 @@ class SiteController extends Controller
         return $this->render('index', [
             'vacancies' => $vacancies,
             'pagination' => $pagination,
+        ]);
+    }
+    /**
+     * Displays vacancy details.
+     *
+     * @return mixed
+     */
+    public function actionDetail()
+    {
+        $request = Yii::$app->request;
+        $id = $request->get('id');
+        $vacancy = Vacancy::findOne(['id' => $id]);
+        return $this->render('detail', [
+            'vacancy' => $vacancy,
+        ]);
+    }
+    /**
+     * Displays edit profile.
+     *
+     * @return mixed
+     */
+    public function actionProfile()
+    {        
+        $profile = Profile::findByUserID(Yii::$app->user->id);
+        if ($profile->load(Yii::$app->request->post())) {
+            $profile->save(false);
+            Yii::$app->session->setFlash('success', 'Perfil atualizado com sucesso.');
+            // return $this->redirect(['site/index']);
+        }        
+        return $this->render('profile', [
+            'profile' => $profile,
+        ]);
+    }
+
+    /**
+     * Form add vacancy.
+     *
+     * @return mixed
+     */
+    public function actionVacancy()
+    {
+        $vacancy = new VacancyForm();
+        if ($vacancy->load(Yii::$app->request->post())) {
+            $vacancy->save(false);
+            Yii::$app->session->setFlash('success', 'Nova vaga cadastrada com sucesso.');
+            return $this->redirect(['site/index']);
+        }
+        return $this->render('vacancy', [
+            'vacancy' => $vacancy,
         ]);
     }
 
@@ -169,14 +221,21 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
-            return $this->goHome();
+        $user = new SignupForm();
+        $profile = new ProfileForm();
+        if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())) {
+            if ($user->validate() && $profile->validate())
+            {
+                $user = $user->signup();
+                $profile->user_id = $user->getId();
+                $profile->save();
+                Yii::$app->session->setFlash('success', 'Thank you for registration.');
+                return $this->redirect(['site/index']);
+            }
         }
-
         return $this->render('signup', [
-            'model' => $model,
+            'user' => $user,
+            'profile' => $profile,
         ]);
     }
 

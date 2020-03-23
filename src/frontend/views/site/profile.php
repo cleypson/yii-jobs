@@ -4,40 +4,24 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \frontend\models\SignupForm */
 
-use yii\helpers\Html;
+use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 
-$this->title = 'Signup';
+$this->title = 'Profile';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup">
-    <h3><?= Html::encode($this->title) ?></h3>
+<div class="site-profile">
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <p>Atualizar perfil:</p>
+
     <div class="row">
-        <div class="col-lg-8">
-            <?php $form = ActiveForm::begin([
-                'id' => 'form-signup',
-                'layout' => 'horizontal',
-                'fieldConfig' => [
-                    'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
-                    'horizontalCssClasses' => [
-                        'label' => 'col-sm-4',
-                        'offset' => 'offset-sm-8',
-                        'wrapper' => 'col-sm-8',
-                        'error' => '',
-                        'hint' => '',
-                    ],
-                ],
-            ]); ?>
+        <div class="col-lg-5">
+            <?php $form = ActiveForm::begin(['id' => 'form-profile']); ?>
 
             <?= $form->field($profile, 'first_name')->label('Primeiro Nome')  ?>
 
             <?= $form->field($profile, 'last_name')->label('Último Nome') ?>
-
-            <?= $form->field($user, 'username')->textInput(['autofocus' => true]) ?>
-
-            <?= $form->field($user, 'email') ?>
-
-            <?= $form->field($user, 'password')->passwordInput() ?>
 
             <?= $form->field($profile, 'phonenumber')->label('Telefone de Contato') ?>
 
@@ -52,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($profile, 'note')->textarea()->label('Observações (opcional)') ?>
 
             <div class="form-group">
-                <?= Html::submitButton('Enviar', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                <?= Html::submitButton('Salvar', ['class' => 'btn btn-primary', 'name' => 'save-button']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

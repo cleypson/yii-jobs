@@ -33,6 +33,5 @@ $this->title = 'Feba Jobs';
         <div class="row">
             <?= LinkPager::widget(['pagination' => $pagination]) ?>
         </div>
-
     </div>
 </div>

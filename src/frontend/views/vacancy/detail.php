@@ -10,7 +10,7 @@ $this->title = 'Feba Jobs: '.$vacancy->title;
     <div class="body-content">
         <div class="row">
             <tr>
-                <div class="card">
+                <div class="card card-vacancy">
                     <div class="card-header">
                         <h3 class="card-title"><?= $vacancy->title ?></h3>
                     </div>
@@ -24,7 +24,7 @@ $this->title = 'Feba Jobs: '.$vacancy->title;
                     </div>
                     <div class="card-footer">
                         <button type="button" class="btn btn-primary">Aplicar-se</button>
-                        <?= Html::a('Voltar', ['site/index'], ['class' => 'btn btn-danger float-right']) ?>
+                        <?= Html::a('Voltar', ['vacancy/index'], ['class' => 'btn btn-danger float-right']) ?>
                     </div>
                 </div>
             </tr>

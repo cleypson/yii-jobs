@@ -3,11 +3,11 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use frontend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\bootstrap4\Breadcrumbs;
-use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
 AppAsset::register($this);
@@ -56,9 +56,9 @@ AppAsset::register($this);
             $menuItems[] = [
                 'label' => 'Profile',
                 'items' => [
-                    ['label' => 'Perfil', 'url' => ['/site/profile']],
+                    ['label' => 'Perfil', 'url' => ['/profile/update']],
                     '<div class="dropdown-divider"></div>',
-                    ['label' => 'Vagas', 'url' => ['/site/vacancy']],
+                    ['label' => 'Vagas', 'url' => ['/vacancy/create']],
                     ['label' => 'Contato', 'url' => ['/site/contact']],
                     ['label' => 'Sobre', 'url' => ['/site/about']],
                     '<div class="dropdown-divider"></div>',                        

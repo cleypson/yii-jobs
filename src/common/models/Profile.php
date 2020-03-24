@@ -44,6 +44,25 @@ class Profile extends ActiveRecord
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            ['first_name', 'required'],
+            ['first_name', 'string', 'min' => 1, 'max' => 255],
+            ['last_name', 'required'],
+            ['last_name', 'string', 'min' => 1, 'max' => 255],
+            ['phonenumber', 'string', 'max' => 14],
+            ['github_link', 'string', 'max' => 255],
+            ['resume_link', 'string', 'max' => 255],
+            ['linkedin_link', 'string', 'max' => 255],
+            ['portfolio_link', 'string', 'max' => 255],
+            ['note', 'string'],
+        ];
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getUser()

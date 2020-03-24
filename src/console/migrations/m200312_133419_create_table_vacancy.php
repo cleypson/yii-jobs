@@ -14,14 +14,14 @@ class m200312_133419_create_table_vacancy extends Migration
     public function safeUp()
     {
         $this->createTable('vacancy', [
-            'id' => 'pk',
-            'title' => Schema::TYPE_STRING,
-            'description' => Schema::TYPE_TEXT,
-            'requeriments' => Schema::TYPE_TEXT,
-            'salary_range' => Schema::TYPE_DOUBLE,
-            'status' => Schema::TYPE_INTEGER,
-            'created_at' => Schema::TYPE_INTEGER,
-            'updated_at' => Schema::TYPE_INTEGER,
+            'id' => $this->primaryKey(),
+            'title' => $this->string(),
+            'description' => $this->text(),
+            'requeriments' => $this->text(),
+            'salary_range' => $this->double(),
+            'status' => $this->integer(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
 
     }
@@ -31,9 +31,8 @@ class m200312_133419_create_table_vacancy extends Migration
      */
     public function safeDown()
     {
-        echo "m200312_133419_create_table_vacancy cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('vacancy');
+        return true;
     }
 
     /*

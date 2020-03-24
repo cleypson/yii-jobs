@@ -15,8 +15,8 @@ class m200319_130031_create_junction_table_profile_vacancy extends Migration
     {
         // create table junction profile_vacancy
         $this->createTable('profile_vacancy', [
-            'profile_id' => Schema::TYPE_INTEGER,
-            'vacancy_id' => Schema::TYPE_INTEGER,
+            'profile_id' => $this->integer(),
+            'vacancy_id' => $this->integer(),
             'created_at' => $this->dateTime(),
             'PRIMARY KEY(profile_id, vacancy_id)',
         ]);
@@ -61,9 +61,20 @@ class m200319_130031_create_junction_table_profile_vacancy extends Migration
      */
     public function safeDown()
     {
-        echo "m200319_130031_create_junction_table_profile_vacancy cannot be reverted.\n";
-
-        return false;
+        $this->dropIndex(
+            'idx-profile_vacancy-profile_id',
+            'profile_vacancy');
+        $this->dropForeignKey(
+            'fk-profile_vacancy-profile_id',
+            'profile_vacancy');
+        $this->dropIndex(
+            'idx-profile_vacancy-vacancy_id',
+            'profile_vacancy');
+        $this->dropForeignKey(
+            'fk-profile_vacancy-vacancy_id',
+            'profile_vacancy');
+        $this->dropTable('profile_vacancy');
+        return true;
     }
 
     /*

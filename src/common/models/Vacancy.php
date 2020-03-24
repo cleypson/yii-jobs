@@ -38,12 +38,18 @@ class Vacancy extends ActiveRecord
             TimestampBehavior::className(),
         ];
     }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
+            ['title', 'required'],
+            ['title', 'string', 'min' => 1, 'max' => 255],
+            ['description', 'string'],
+            ['requeriments', 'string'],
+            ['salary_range', 'double'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];

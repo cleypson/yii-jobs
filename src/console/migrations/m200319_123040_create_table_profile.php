@@ -15,18 +15,18 @@ class m200319_123040_create_table_profile extends Migration
     public function safeUp()
     {
         $this->createTable('profile', [
-            'id' => 'pk',
-            'user_id' => Schema::TYPE_INTEGER,
-            'first_name' => Schema::TYPE_STRING,
-            'last_name' => Schema::TYPE_STRING,
-            'github_link' => Schema::TYPE_STRING,
-            'linkedin_link' => Schema::TYPE_STRING,
-            'resume_link' => Schema::TYPE_STRING,
-            'portfolio_link' => Schema::TYPE_STRING,
-            'phonenumber' => Schema::TYPE_STRING,
-            'note' => Schema::TYPE_TEXT,
-            'created_at' => Schema::TYPE_INTEGER,
-            'updated_at' => Schema::TYPE_INTEGER,
+            'id' => $this->primaryKey(),
+            'user_id' => $this->primaryKey(),
+            'first_name' => $this->string(),
+            'last_name' => $this->string(),
+            'github_link' => $this->string(),
+            'linkedin_link' => $this->string(),
+            'resume_link' => $this->string(),
+            'portfolio_link' => $this->string(),
+            'phonenumber' => $this->string(),
+            'note' => $this->text(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
 
         // add foreign key for table `user`
@@ -52,9 +52,10 @@ class m200319_123040_create_table_profile extends Migration
      */
     public function safeDown()
     {
-        echo "m200319_123040_create_table_profile cannot be reverted.\n";
-
-        return false;
+        $this->dropIndex('idx-profile_id', 'profile');
+        $this->dropForeignKey('fk-profile-user_id', 'profile');
+        $this->dropTable('profile');
+        return true;
     }
 
     /*

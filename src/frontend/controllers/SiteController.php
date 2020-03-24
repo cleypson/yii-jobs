@@ -10,6 +10,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\Profile;
 use common\models\Vacancy;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
@@ -170,7 +171,7 @@ class SiteController extends Controller
     public function actionSignup()
     {
         $user = new SignupForm();
-        $profile = new ProfileForm();
+        $profile = new Profile();
         if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())) {
             if ($user->validate() && $profile->validate())
             {

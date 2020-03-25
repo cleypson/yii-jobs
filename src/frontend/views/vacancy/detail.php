@@ -4,7 +4,7 @@
 
 use yii\bootstrap4\Html;
 use rmrevin\yii\fontawesome\FA;
-use yii\bootstrap\ActiveForm;
+use yii\bootstrap4\ActiveForm;
 
 $this->title = 'Feba Jobs: ' . $vacancy->title;
 $this->params['breadcrumbs'][] = 'Vagas';

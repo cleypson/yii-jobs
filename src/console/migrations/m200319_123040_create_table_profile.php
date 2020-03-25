@@ -16,7 +16,7 @@ class m200319_123040_create_table_profile extends Migration
     {
         $this->createTable('profile', [
             'id' => $this->primaryKey(),
-            'user_id' => $this->primaryKey(),
+            'user_id' => $this->integer(),
             'first_name' => $this->string(),
             'last_name' => $this->string(),
             'github_link' => $this->string(),

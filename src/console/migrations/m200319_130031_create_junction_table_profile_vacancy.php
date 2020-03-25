@@ -62,17 +62,17 @@ class m200319_130031_create_junction_table_profile_vacancy extends Migration
      */
     public function safeDown()
     {
-        $this->dropIndex(
-            'idx-profile_vacancy-profile_id',
-            'profile_vacancy');
         $this->dropForeignKey(
             'fk-profile_vacancy-profile_id',
+            'profile_vacancy');
+        $this->dropForeignKey(
+            'fk-profile_vacancy-vacancy_id',
             'profile_vacancy');
         $this->dropIndex(
             'idx-profile_vacancy-vacancy_id',
             'profile_vacancy');
-        $this->dropForeignKey(
-            'fk-profile_vacancy-vacancy_id',
+        $this->dropIndex(
+            'idx-profile_vacancy-profile_id',
             'profile_vacancy');
         $this->dropTable('profile_vacancy');
         return true;

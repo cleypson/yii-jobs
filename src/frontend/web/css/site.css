@@ -8,10 +8,14 @@ body {
     height: auto;
     margin: 0 auto -60px;
     padding: 0 0 60px;
+    background-image: linear-gradient(180deg, rgba(0, 78, 146, 0.75) 15%, rgba(255, 255, 255, 1) 85%),
+        url('/assets/images/startup-desk.jpg');
+    background-position: center;
+    background-size: cover;
 }
 
-.wrap > .container {
-    padding: 70px 15px 20px;
+.wrap>.container {
+    padding: 35px 15px 20px;
 }
 
 .footer {
@@ -37,7 +41,8 @@ body {
 }
 
 /* add sorting icons to gridview sort links */
-a.asc:after, a.desc:after {
+a.asc:after,
+a.desc:after {
     position: relative;
     top: 1px;
     display: inline-block;
@@ -96,31 +101,139 @@ a.desc:after {
 }
 
 /* align the logout "link" (button in form) of the navbar */
-.nav li > form > button.logout {
+.nav li>form>button.logout {
     padding: 15px;
     border: none;
 }
 
 @media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
+    .nav li>form>button.logout {
+        display: block;
         text-align: left;
         width: 100%;
         padding: 10px 15px;
     }
 }
 
-.nav > li > form > button.logout:focus,
-.nav > li > form > button.logout:hover {
+.nav>li>form>button.logout:focus,
+.nav>li>form>button.logout:hover {
     text-decoration: none;
 }
 
-.nav > li > form > button.logout:focus {
+.nav>li>form>button.logout:focus {
     outline: none;
+}
+
+.background-gray {
+    background-color: #F4F4F4;
 }
 
 .card-vacancy {
     margin-bottom: 2.5rem;
     width: 100%;
     min-height: 10rem;
+}
+
+.btn {
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+.card-vacancy-index {
+    margin-bottom: 2.5rem;
+    width: 100%;
+    min-height: 18rem;
+    max-height: 22rem;
+}
+
+.vacancy-description {
+    min-height: 5rem;
+    max-height: 5rem;
+}
+
+.card-vacancy-index .vacancy-description {
+    color: #34495E;
+}
+
+.card-vacancy-index .vacancy-salary_range {
+    color: #34495E;
+    font-weight: bold;
+    font-size: 1.15rem;
+}
+
+.btn-fa {
+    font-size: 1.3rem;
+}
+
+.hr-line-dashed {
+    border-top: 1px dashed #e7eaec;
+    color: #ffffff;
+    background-color: #ffffff;
+    height: 1px;
+    margin: 20px 0;
+}
+
+.card-title {
+    color: #34495E;
+}
+
+.navbar-brand {
+    color: #235189 !important;
+    font-size: 1.35rem;
+    font-weight: bolder;
+    font-stretch: expanded;
+
+}
+
+.nav-link.active {
+    color: #235189 !important;
+    font-weight: bolder;
+}
+
+.card-vacancy-index .card-title {
+    margin-bottom: 0;
+}
+
+.card-vacancy-index:hover {
+    box-shadow: 0 1rem 3rem rgba(164, 164, 164, .275) !important
+}
+
+.vacancy-body-link:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: white !important;
+}
+
+.card-header,
+.card-footer {
+    padding: 1.15rem 1rem;
+    background-color: white;
+}
+
+.feba-footer-text {
+    color: #235189 !important;
+    font-size: 1.35rem;
+    font-weight: bolder;
+    font-stretch: expanded;
+}
+
+.site-index {
+    padding: 2rem;
+}
+
+.site-container {
+    background-color: white;
+    padding: 2rem;
+}
+
+.jumbotron .display-4 {
+    color: #fff;
+    font-size: 4rem;
+    font-weight: 600;
+    text-shadow: 0px 0px 30px #000000;
+    margin-bottom: 2rem;
+}
+
+.jumbotron .btn {
+    font-weight: 600;
 }

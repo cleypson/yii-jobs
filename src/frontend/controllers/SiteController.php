@@ -78,20 +78,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $query = Vacancy::find(['status' => 10]);
-        $pagination = new Pagination([
-            'defaultPageSize' => 5,
-            'totalCount' => $query->count(),
-        ]);
-
-        $vacancies = $query->orderBy(['id' => SORT_DESC])
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
+        $vacancies = Vacancy::find(['status' => 10])->orderBy(['id' => SORT_DESC])
+            ->limit(6)
             ->all();
-
         return $this->render('index', [
             'vacancies' => $vacancies,
-            'pagination' => $pagination,
         ]);
     }
 

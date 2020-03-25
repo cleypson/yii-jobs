@@ -15,10 +15,11 @@ class m200319_130031_create_junction_table_profile_vacancy extends Migration
     {
         // create table junction profile_vacancy
         $this->createTable('profile_vacancy', [
+            'id' => $this->primaryKey(),
             'profile_id' => $this->integer(),
             'vacancy_id' => $this->integer(),
-            'created_at' => $this->dateTime(),
-            'PRIMARY KEY(profile_id, vacancy_id)',
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
 
         // create index for column profile_id

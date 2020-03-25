@@ -7,8 +7,8 @@
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 
-$this->title = 'Cadastrar nova vaga';
-$this->params['breadcrumbs'][] = 'Cadastrar nova vaga';
+$this->title = 'Editar vaga';
+$this->params['breadcrumbs'][] = 'Vaga / ' . $vacancy->title;;
 ?>
 <div class="site-container">
     <h3><?= Html::encode($this->title) ?></h3>
@@ -32,16 +32,15 @@ $this->params['breadcrumbs'][] = 'Cadastrar nova vaga';
 
             <?= $form->field($vacancy, 'title')->label('Título')  ?>
             <div class="hr-line-dashed"></div>
-            <?= $form->field($vacancy, 'description')->textarea()->label('Descrição') ?>
+            <?= $form->field($vacancy, 'description')->textarea(['rows' => 5])->label('Descrição') ?>
             <div class="hr-line-dashed"></div>
-            <?= $form->field($vacancy, 'requeriments')->textarea()->label('Requisitos') ?>
+            <?= $form->field($vacancy, 'requeriments')->textarea(['rows' => 10])->label('Requisitos') ?>
             <div class="hr-line-dashed"></div>
             <?= $form->field($vacancy, 'salary_range')->label('Salário') ?>
             <div class="hr-line-dashed"></div>
             <div class="form-group">
                 <?= Html::submitButton('Salvar', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
             </div>
-
             <?php ActiveForm::end(); ?>
         </div>
     </div>

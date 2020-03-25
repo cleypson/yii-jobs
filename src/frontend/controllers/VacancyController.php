@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\models\Profile;
+use common\models\ProfileVacancy;
 use common\models\Vacancy;
 use frontend\models\VacancyForm;
 use Yii;
@@ -38,7 +40,7 @@ class VacancyController extends Controller
                     'create' => ['GET', 'POST'],
                 ],
             ],
- 
+
         ];
     }
 
@@ -89,6 +91,22 @@ class VacancyController extends Controller
         $request = Yii::$app->request;
         $id = $request->get('id');
         $vacancy = Vacancy::findOne(['id' => $id]);
+        if (Yii::$app->request->isPost) {
+            if (Yii::$app->request->post('submit-button') == 'apply') {
+                $user_id = Yii::$app->user->id;
+                $profile = Profile::find()->where(['user_id' => $user_id])->one();
+                $apply = new ProfileVacancy();
+                $apply->profile_id = $profile->id;
+                $apply->vacancy_id = $vacancy->id;
+                $apply->save();
+                Yii::$app->session->setFlash('success', "Candidatura a vaga #$vacancy->id $vacancy->title realizada com sucesso.");
+            } else if (Yii::$app->request->post('submit-button') == 'delete') {
+                $vacancy->delete();
+                Yii::$app->session->setFlash('info', "Vaga #$vacancy->id $vacancy->title deletada!.");
+                return $this->redirect(['vacancy/index']);
+            }
+        }
+
         return $this->render('detail', [
             'vacancy' => $vacancy,
         ]);
@@ -108,6 +126,21 @@ class VacancyController extends Controller
         }
         return $this->render('create', [
             'vacancy' => $vacancy,
+        ]);
+    }
+    /**
+     * Displays edit profile.
+     *
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $model = Vacancy::findOne($id);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['vacancy/detail', 'id' => $model->id]);
+        }
+        return $this->render('update', [
+            'vacancy' => $model,
         ]);
     }
 }

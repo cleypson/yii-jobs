@@ -28,7 +28,8 @@ AppAsset::register($this);
 <body>
     <?php $this->beginBody() ?>
 
-    <div class="wrap">
+
+    <div class="wrap background-gray">
         <?php
         NavBar::begin([
             'brandLabel' => Yii::$app->name,
@@ -38,31 +39,31 @@ AppAsset::register($this);
             ],
         ]);
         $menuItems = [
-            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'HOME', 'url' => ['/site/index']],
         ];
         if (Yii::$app->user->isGuest) {
             $menuItems[] = [
-                'label' => 'Login',
+                'label' => 'LOGIN',
                 'items' => [
-                    ['label' => 'Signup', 'url' => ['/site/signup']],
+                    ['label' => 'SIGNUP', 'url' => ['/site/signup']],
                     '<div class="dropdown-divider"></div>',
-                    ['label' => 'Sobre', 'url' => ['/site/about']],
-                    ['label' => 'Contato', 'url' => ['/site/contact']],
+                    ['label' => 'SOBRE', 'url' => ['/site/about']],
+                    ['label' => 'CONTATO', 'url' => ['/site/contact']],
                     '<div class="dropdown-divider"></div>',
-                    ['label' => 'Login', 'url' => ['/site/login']],
+                    ['label' => 'LOGIN', 'url' => ['/site/login']],
                 ],
             ];
         } else {
             $menuItems[] = [
-                'label' => 'Profile',
+                'label' => 'PERFIL',
                 'items' => [
-                    ['label' => 'Perfil', 'url' => ['/profile/update']],
+                    ['label' => 'ALTERAR DADOS', 'url' => ['/profile/update']],
                     '<div class="dropdown-divider"></div>',
-                    ['label' => 'Vagas', 'url' => ['/vacancy/create']],
-                    ['label' => 'Contato', 'url' => ['/site/contact']],
-                    ['label' => 'Sobre', 'url' => ['/site/about']],
-                    '<div class="dropdown-divider"></div>',                        
-                    ['label' => 'Log out', 'url' => ['/site/logout']],
+                    ['label' => 'VAGAS', 'url' => ['/vacancy/create']],
+                    ['label' => 'CONTATO', 'url' => ['/site/contact']],
+                    ['label' => 'SOBRE', 'url' => ['/site/about']],
+                    '<div class="dropdown-divider"></div>',
+                    ['label' => 'SAIR', 'url' => ['/site/logout']],
                 ]
             ];
         }
@@ -72,7 +73,6 @@ AppAsset::register($this);
         ]);
         NavBar::end();
         ?>
-
         <div class="container">
             <?= Breadcrumbs::widget([
                 'itemTemplate' => "\n\t<li class=\"breadcrumb-item\"><i>{link}</i></li>\n", // template for all links
@@ -86,7 +86,7 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+            <p class="pull-left">&copy;<?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
         </div>
     </footer>
 

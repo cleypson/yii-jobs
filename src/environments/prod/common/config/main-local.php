@@ -3,9 +3,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
-            'username' => 'root',
-            'password' => '',
+            'dsn' => 'mysql:host=db.feba.dev;dbname=feba_jobs',
+            'username' => 'feba_jobs',
+            'password' => 'vM4z6oMmfyE6ZiULN0jj6L3G$',
             'charset' => 'utf8',
         ],
         'mailer' => [

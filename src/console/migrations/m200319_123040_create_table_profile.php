@@ -52,8 +52,8 @@ class m200319_123040_create_table_profile extends Migration
      */
     public function safeDown()
     {
-        $this->dropIndex('idx-profile_id', 'profile');
         $this->dropForeignKey('fk-profile-user_id', 'profile');
+        $this->dropIndex('idx-profile_id', 'profile');
         $this->dropTable('profile');
         return true;
     }

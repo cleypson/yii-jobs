@@ -32,11 +32,35 @@ $this->params['breadcrumbs'][] = $vacancy->title;
                     <div class="card-header">
                         <h3 class="card-title">
                             <?= $vacancy->title ?>
+
                             <?= Html::a(
                                 Yii::t('app', '{icon}', ['icon' => FA::icon('undo')]),
                                 ['vacancy/index'],
-                                ['class' => 'btn btn-danger float-right']
+                                ['class' => 'btn btn-danger float-right', 'title' => 'Voltar']
                             ) ?>
+
+                            <?= Html::a(
+                                Yii::t('app', '{icon}', ['icon' => FA::icon('trash', ['class' => 'btn-fa'])]),
+                                ['delete', 'id' => $vacancy->id],
+                                [
+                                    'class'         => 'btn btn-danger float-right',
+                                    'data'          => [
+                                        'method'    => 'post',
+                                        'confirm'   => 'Tem certeza?',
+                                    ]
+                                ]
+                            ); ?>
+                            <?= Html::a(
+                                Yii::t('app', '{icon}', ['icon' => FA::icon('edit', ['class' => 'btn-fa'])]),
+                                ['vacancy/update', 'id' => $vacancy->id],
+                                ['class' => 'btn btn-info float-right']
+                            ) ?>
+                            <?= Html::a(
+                                Yii::t('app', '{icon}', ['icon' => FA::icon('plus')]),
+                                ['vacancy/create'],
+                                ['class' => 'btn btn-info float-right', 'title' => 'Nova vaga']
+                            ) ?>
+
                         </h3>
                     </div>
                     <div class="card-body">
@@ -54,9 +78,6 @@ $this->params['breadcrumbs'][] = $vacancy->title;
                                 <span class="badge badge-pill badge-secondary badge-tag"><?= $tag->description ?></span>
                             <?php endforeach; ?>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <?= Html::submitButton('Quero me Candidatar', ['class' => 'btn btn-info btn-lg', 'name' => 'submit-button', 'value' => 'apply']) ?>
                     </div>
                     <?php ActiveForm::end(); ?>
                 </div>

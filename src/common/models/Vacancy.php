@@ -3,6 +3,7 @@
 namespace common\models;
 
 use yii\behaviors\TimestampBehavior;
+use cornernote\linkall\LinkAllBehavior;
 use yii\db\ActiveRecord;
 
 /**
@@ -19,6 +20,8 @@ use yii\db\ActiveRecord;
  */
 class Vacancy extends ActiveRecord
 {
+    public $tag_ids;
+    
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
@@ -35,6 +38,7 @@ class Vacancy extends ActiveRecord
     public function behaviors()
     {
         return [
+            LinkAllBehavior::className(),
             TimestampBehavior::className(),
         ];
     }
@@ -45,7 +49,7 @@ class Vacancy extends ActiveRecord
     public function rules()
     {
         return [
-            ['title', 'required'],
+            [['title', 'description', 'tag_ids'] ,'required'],
             ['title', 'string', 'min' => 1, 'max' => 255],
             ['description', 'string'],
             ['requeriments', 'string'],
@@ -62,4 +66,41 @@ class Vacancy extends ActiveRecord
     {
         return $this->getPrimaryKey();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        $tags = [];
+        foreach ($this->tag_ids as $tag_description) {
+            $tag = Tag::getTagByDescription($tag_description);
+            if ($tag) {
+                $tags[] = $tag;
+            }
+        }
+        $this->linkAll('tags', $tags);
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTags()
+    {
+        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])
+            ->viaTable('vacancy_tag', ['vacancy_id' => 'id']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getApplications()
+    {
+        return $this->hasMany(Profile::className(), ['id' => 'profile_id'])
+            ->viaTable('profile_vacancy', ['vacancy_id' => 'id']);
+    }
+
+    
+
 }

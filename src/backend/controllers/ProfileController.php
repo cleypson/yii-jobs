@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 use Yii;
 use common\models\Profile;
@@ -8,7 +8,6 @@ use common\models\Tag;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use yii\helpers\ArrayHelper;
 
 class ProfileController extends Controller
 {
@@ -64,15 +63,13 @@ class ProfileController extends Controller
     {
         $userid = Yii::$app->user->id;
         $model = Profile::find()->where(['user_id' => $userid])->one();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['profile/update', 'id' => $model->id]);
-        }
         $tags = Tag::find()->orderBy('description')->all();
-        $tag_list = ArrayHelper::map($tags, 'description', 'description');
-        $model->tag_ids = ArrayHelper::map($model->tags, 'description', 'description');
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['vacancy/index']);
+        }
         return $this->render('update', [
             'profile' => $model,
-            'tag_list' => $tag_list,
+            'tags'=> $tags 
         ]);
     }
 }

@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
+use yii\widgets\MaskedInput;
 
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
@@ -39,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= $form->field($user, 'password')->passwordInput() ?>
 
-            <?= $form->field($profile, 'phonenumber')->label('Telefone de Contato') ?>
+            <?= $form->field($profile, 'phonenumber')->label('Telefone de Contato')->widget(MaskedInput::className(), ['mask' => '(99) 9999-9999'])?>
 
             <?= $form->field($profile, 'github_link')->label('Github (opcional)') ?>
 

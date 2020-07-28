@@ -237,3 +237,8 @@ a.desc:after {
 .jumbotron .btn {
     font-weight: 600;
 }
+
+.badge-tag {
+    font-size: 1.3rem;
+    margin: .3rem;
+}

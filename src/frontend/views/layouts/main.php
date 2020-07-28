@@ -57,9 +57,8 @@ AppAsset::register($this);
             $menuItems[] = [
                 'label' => 'PERFIL',
                 'items' => [
-                    ['label' => 'ALTERAR DADOS', 'url' => ['/profile/update']],
+                    ['label' => 'MEUS DADOS', 'url' => ['/profile/update']],
                     '<div class="dropdown-divider"></div>',
-                    ['label' => 'VAGAS', 'url' => ['/vacancy/create']],
                     ['label' => 'CONTATO', 'url' => ['/site/contact']],
                     ['label' => 'SOBRE', 'url' => ['/site/about']],
                     '<div class="dropdown-divider"></div>',

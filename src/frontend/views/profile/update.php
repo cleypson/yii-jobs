@@ -4,8 +4,10 @@
 /* @var $form yii\bootstrap4\ActiveForm */
 /* @var $model \common\models\Profile */
 
+use kartik\widgets\Select2;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
+use yii\widgets\MaskedInput;
 
 $this->title = 'Editar meu perfil';
 $this->params['breadcrumbs'][] = $this->title;
@@ -34,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="hr-line-dashed"></div>
             <?= $form->field($profile, 'last_name')->label('Último Nome') ?>
             <div class="hr-line-dashed"></div>
-            <?= $form->field($profile, 'phonenumber')->label('Telefone de Contato') ?>
+            <?= $form->field($profile, 'phonenumber')->label('Telefone de Contato')->widget(MaskedInput::className(), ['mask' => '(99) 99999-9999']) ?>
             <div class="hr-line-dashed"></div>
             <?= $form->field($profile, 'github_link')->label('Github (opcional)') ?>
             <div class="hr-line-dashed"></div>
@@ -45,6 +47,18 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($profile, 'portfolio_link')->label('Portifólio (opcional)') ?>
             <div class="hr-line-dashed"></div>
             <?= $form->field($profile, 'note')->textarea()->label('Observações (opcional)') ?>
+            <div class="hr-line-dashed"></div>
+            <?= $form->field($profile, 'tag_ids')->widget(Select2::classname(), [
+                'data' => $tag_list,
+                'attribute' => 'tag_ids',
+                'options' => ['placeholder' => 'Minhas habilidades', 'multiple' => true],
+                'size' => Select2::LARGE,
+                'pluginOptions' => [
+                    'tags' => true,
+                    'tokenSeparators' => [',', ' '],
+                    'maximumInputLength' => 20
+                ],
+            ])->label('Habilidades'); ?>
             <div class="hr-line-dashed"></div>
             <div class="form-group">
                 <?= Html::submitButton('Salvar', ['class' => 'btn btn-primary', 'name' => 'save-button']) ?>

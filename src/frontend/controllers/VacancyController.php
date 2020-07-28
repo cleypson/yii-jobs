@@ -88,9 +88,7 @@ class VacancyController extends Controller
      */
     public function actionDetail()
     {
-        $request = Yii::$app->request;
-        $id = $request->get('id');
-        $vacancy = Vacancy::findOne(['id' => $id]);
+        $vacancy = Vacancy::findOne((int) Yii::$app->request->get('id'));
         if (Yii::$app->request->isPost) {
             if (Yii::$app->request->post('submit-button') == 'apply') {
                 $user_id = Yii::$app->user->id;
@@ -133,9 +131,9 @@ class VacancyController extends Controller
      *
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate()
     {
-        $model = Vacancy::findOne($id);
+        $model = Vacancy::findOne((int) Yii::$app->request->get('id'));
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['vacancy/detail', 'id' => $model->id]);
         }

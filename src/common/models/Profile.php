@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use cornernote\linkall\LinkAllBehavior;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 
@@ -23,8 +24,12 @@ use yii\behaviors\TimestampBehavior;
  */
 
 
-class Profile extends ActiveRecord 
+class Profile extends ActiveRecord
 {
+    public $username;
+    public $email;
+    public $password;
+    public $tag_ids;
     /**
      * {@inheritdoc}
      */
@@ -39,6 +44,7 @@ class Profile extends ActiveRecord
     public function behaviors()
     {
         return [
+            LinkAllBehavior::className(),
             TimestampBehavior::className(),
         ];
     }
@@ -49,11 +55,10 @@ class Profile extends ActiveRecord
     public function rules()
     {
         return [
-            ['first_name', 'required'],
+            [['first_name', 'last_name', 'tag_ids'], 'required'],
             ['first_name', 'string', 'min' => 1, 'max' => 255],
-            ['last_name', 'required'],
             ['last_name', 'string', 'min' => 1, 'max' => 255],
-            ['phonenumber', 'string', 'max' => 14],
+            ['phonenumber', 'string', 'max' => 16],
             ['github_link', 'string', 'max' => 255],
             ['resume_link', 'string', 'max' => 255],
             ['linkedin_link', 'string', 'max' => 255],
@@ -70,6 +75,43 @@ class Profile extends ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFullName()
+    {
+        return $this->first_name .' '. $this->last_name;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        $tags = [];
+        foreach ($this->tag_ids as $tag_description) {
+            $tag = Tag::getTagByDescription($tag_description);
+            if ($tag) {
+                $tags[] = $tag;
+            }
+        }
+        $this->linkAll('tags', $tags);
+        parent::afterSave($insert, $changedAttributes);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getTags()
+    {
+        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])
+            ->viaTable('profile_tag', ['profile_id' => 'id']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getVacancies()
     {
         return $this->hasMany(Vacancy::classname(), ['id' => 'vacancy_id'])

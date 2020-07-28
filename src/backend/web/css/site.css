@@ -119,3 +119,126 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.background-gray {
+    background-color: #F4F4F4;
+}
+
+.card-vacancy {
+    margin-bottom: 2.5rem;
+    width: 100%;
+    min-height: 10rem;
+}
+
+.card-vacancy.detail {
+    border: none;
+}
+
+.btn {
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+.card-vacancy-index {
+    margin-bottom: 2.5rem;
+    width: 100%;
+    min-height: 18rem;
+    max-height: 22rem;
+}
+
+.vacancy-description {
+    min-height: 5rem;
+    max-height: 5rem;
+}
+
+.card-vacancy-index .vacancy-description {
+    color: #34495E;
+}
+
+.card-vacancy-index .vacancy-salary_range {
+    color: #34495E;
+    font-weight: bold;
+    font-size: 1.15rem;
+}
+
+.btn-fa {
+    font-size: 1rem;
+}
+
+.hr-line-dashed {
+    border-top: 1px dashed #e7eaec;
+    color: #ffffff;
+    background-color: #ffffff;
+    height: 1px;
+    margin: 20px 0;
+}
+
+.card-title {
+    color: #34495E;
+}
+
+.navbar-brand {
+    color: #235189 !important;
+    font-size: 1.35rem;
+    font-weight: bolder;
+    font-stretch: expanded;
+
+}
+
+.nav-link.active {
+    color: #235189 !important;
+    font-weight: bolder;
+}
+
+.card-vacancy-index .card-title {
+    margin-bottom: 0;
+}
+
+.card-vacancy-index:hover {
+    box-shadow: 0 1rem 3rem rgba(164, 164, 164, .275) !important
+}
+
+.vacancy-body-link:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: white !important;
+}
+
+.card-header,
+.card-footer {
+    padding: 1.15rem 1rem;
+    background-color: white;
+}
+
+.feba-footer-text {
+    color: #235189 !important;
+    font-size: 1.35rem;
+    font-weight: bolder;
+    font-stretch: expanded;
+}
+
+.site-index {
+    padding: 2rem;
+}
+
+.site-container {
+    background-color: white;
+    padding: 2rem;
+}
+
+.jumbotron .display-4 {
+    color: #fff;
+    font-size: 4rem;
+    font-weight: 600;
+    text-shadow: 0px 0px 30px #000000;
+    margin-bottom: 2rem;
+}
+
+.jumbotron .btn {
+    font-weight: 600;
+}
+
+.badge-tag {
+    font-size: 1.3rem;
+    margin: .3rem;
+}

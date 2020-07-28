@@ -32,7 +32,6 @@ $this->params['breadcrumbs'][] = 'Vagas';
             </div>
         </div>
         <div class="row">
-            <div class="hr-line-dashed"></div>
             <?= LinkPager::widget(['pagination' => $pagination]) ?>
         </div>
     </div>
